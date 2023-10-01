@@ -1,0 +1,13 @@
+FROM py3api:latest
+
+# docx
+# doc2docx
+# docx2xml, xml2docx
+# docx2pdf
+RUN pip install docx docx2pdf doc2docx docx-utils
+RUN pip install lxml jieba openpyxl pypdf pypdf[crypto] pdfminer
+
+EXPOSE 8080
+
+WORKDIR /app/
+CMD ["bash"]

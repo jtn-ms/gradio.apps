@@ -1,0 +1,9 @@
+FROM py3:latest
+
+RUN pip install gradio==3.37.0 flask tornado
+
+EXPOSE 8080
+
+WORKDIR /app
+
+CMD ["bash"]

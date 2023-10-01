@@ -1,0 +1,38 @@
+FROM py3api:latest
+
+RUN pip install accelerate==0.21.0 \
+                auto-gptq==0.3.0\
+                bitsandbytes==0.40.2\
+                gradio==3.37.0\
+                protobuf==3.20.3\
+                scipy==1.11.1\
+                sentencepiece==0.1.99\
+                torch==2.0.1\
+                transformers==4.31.0\
+                tqdm==4.65.0\
+                python-dotenv==1.0.0\
+                llama-cpp-python==0.1.77\
+                memory-profiler==0.61.0\
+                huggingface-hub==0.16.4\
+                fastapi==0.100.0\
+                uvicorn==0.23.1\
+                sse-starlette==1.6.5\
+                pydantic==2.2.1\
+                pydantic-settings==2.0.3\
+                pytest==7.4.0\
+                black==23.7.0
+
+# Download latest github/llama2-webui in llama2-webui directory
+RUN git clone https://github.com/jtn-ms/llama2-webui.git /app/llama2-webui
+
+RUN mkdir /app/llama2-webui/models
+RUN cd /app/llama2-webui/models && wget --content-disposition https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/resolve/main/llama-2-7b-chat.ggmlv3.q4_0.bin
+RUN cd /app/llama2-webui/models && wget --content-disposition https://huggingface.co/TheBloke/CodeLlama-7B-Instruct-GGML/resolve/main/codellama-7b-instruct.ggmlv3.Q4_0.bin
+
+# gradio default port - 7860
+# http://127.0.0.1:7860/
+
+EXPOSE 8080
+
+WORKDIR /app/llama2-webui
+CMD ["python", "app.py"]

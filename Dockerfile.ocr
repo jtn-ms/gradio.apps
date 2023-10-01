@@ -1,0 +1,12 @@
+FROM py3api:latest
+
+RUN pip install cnocr[ort-cpu] cnocr[serve] paddlepaddle paddleocr
+
+RUN git clone https://github.com/breezedeus/CnOCR.git /app/CnOCR
+RUN git clone https://github.com/yunwoong7/korean_ocr_using_paddleOCR.git /app/paddleOCR
+RUN git clone https://github.com/yunwoong7/korean_ocr_using_pororo /app/pororoOCR
+
+EXPOSE 8080
+
+WORKDIR /app
+CMD ["bash"]

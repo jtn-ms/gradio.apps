@@ -61,24 +61,6 @@ def swap_face(face_swapper,
 
 from restoration import *
 
-
-# def process(source_img: Union[Image.Image, List],
-#             target_img: Image.Image,
-#             source_indexes: str,
-#             target_indexes: str,
-#             model: str):
-
-# def run(*source_imgs,
-#         target_img,
-#         source_indexes,
-#         target_indexes,
-#         num_source_images,
-#         enableface_restore,
-#         background_enhance,
-#         face_upsample,
-#         upscale,
-#         codeformer_fidelity):
-
 def run(*var):
     target_img=var[0]
     source_indexes=var[1]
@@ -102,10 +84,8 @@ def run(*var):
     face_swapper = getFaceSwapModel(model_path)
     
     # read target image
-    print("1111")
     target_img = cv2.cvtColor(np.array(target_img), cv2.COLOR_RGB2BGR)
     print(type(target_img))
-    print("2222")
     
     # detect faces that will be replaced in the target image
     target_faces = get_many_faces(face_analyser, target_img)
@@ -289,8 +269,10 @@ with gr.Blocks() as iface:
         enable_face_restore=gr.Checkbox(value=True, label="Face_Restore")
         bkg_enhance=gr.Checkbox(value=True, label="Background_Enhance")
         face_upsample=gr.Checkbox(value=True, label="Face_Upsample")
-        scaler=gr.Number(value=2, label="Rescaling_Factor (up to 4)")
+        scaler=gr.Number(value=1, label="Rescaling_Factor (up to 4)")
         fidelity=gr.Slider(0, 1, value=0.5, step=0.01, label='Codeformer_Fidelity (0 for better quality, 1 for better identity)')
+        
+    with gr.Row():
         for i in range(0,int(num_of_sources.value)):
             with gr.Tab(f"Face #{i+1}"):
                 with gr.Row():
@@ -308,7 +290,7 @@ with gr.Blocks() as iface:
             #     gr.Slider(0, 1, value=0.5, step=0.01, label='Codeformer_Fidelity (0 for better quality, 1 for better identity)')
     
     with gr.Column():
-        destImg=gr.Image(label="Destination Image")
+        destImg=gr.Image(label="Result")
         button=gr.Button("Reface", variant="primary")
 
     input_var=[targetImg,source_indexes,dest_indexes,num_of_sources,enable_face_restore,bkg_enhance,face_upsample,scaler,fidelity]+origin

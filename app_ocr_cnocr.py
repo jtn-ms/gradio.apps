@@ -4,32 +4,28 @@ import io
 import numpy as np
 import os
 
-# https://github.com/yunwoong7/korean_ocr_using_pororo
-from pororo import Pororo
-from main import PororoOcr
-
-ocr = PororoOcr()
-
+# https://github.com/breezedeus/CnOCR
+from cnocr import CnOcr
+ocr = CnOcr() 
 # Function to detect and save faces from an image
-def run_ocr(input_image,lang="korean"):#input_image, margin_ratio):
+def run_ocr(input_image):#input_image, margin_ratio):
     try:
-        ocr.change_model(lang)
-        return ocr.run_ocr(input_image)
+        results = ocr.ocr(input_image)
+        return " ".join([result['text'] for result in results])
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
 with gr.Blocks() as iface:
     with gr.Row():
-        gr.Markdown("# pororoOCR")
+        gr.Markdown("# CnOcr")
     
     with gr.Column():
         input_image = gr.Image(type="filepath", label="Image")
-        lang=gr.Dropdown(ocr.get_available_langs(),label="Language", info="Select Language Model")
         button=gr.Button("OCR", variant="primary")
 
     button.click(fn=run_ocr,
                 #  inputs=[origin,targetImg,source_indexes,dest_indexes,num_of_sources,enable_face_restore,bkg_enhance,face_upsample,scaler,fidelity],
-                 inputs=[input_image,lang],
+                 inputs=[input_image],
                  outputs=gr.Text(label="Result"))
 
 # Launch the Gradio web service

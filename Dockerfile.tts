@@ -1,0 +1,26 @@
+FROM py3:latest
+
+RUN pip install speechbrain==0.5.15 \
+                transformers==4.33.2 \
+                gradio==3.44.4 \
+                SpeechRecognition==3.10.0 \
+                gTTS==2.3.2
+
+# Download latest github/speechbrain in speechbrain directory
+RUN git clone https://github.com/speechbrain/speechbrain.git /app/speechbrain
+
+# Download models
+# [Text2Speech](https://huggingface.co/speechbrain/tts-tacotron2-ljspeech)
+RUN cd /app/speechbrain && python -c "from speechbrain.pretrained import Tacotron2;tacotron2 = Tacotron2.from_hparams(source='speechbrain/TTS_Tacotron2', savedir='tmpdir')"
+RUN cd /app/speechbrain && python -c "import torchaudio;from speechbrain.pretrained import Tacotron2;from speechbrain.pretrained import HIFIGAN;tacotron2 = Tacotron2.from_hparams(source='speechbrain/tts-tacotron2-ljspeech', savedir='tmpdir_tts');hifi_gan = HIFIGAN.from_hparams(source='speechbrain/tts-hifigan-ljspeech', savedir='tmpdir_vocoder')"
+# Speech2Text
+RUN cd /app/speechbrain && python -c 'from speechbrain.pretrained import EncoderDecoderASR; asr_model = EncoderDecoderASR.from_hparams(source="speechbrain/asr-transformer-transformerlm-librispeech", savedir="pretrained_models/asr-transformer-transformerlm-librispeech")'
+RUN cd /app/speechbrain && python -c 'from speechbrain.pretrained import EncoderDecoderASR; asr_model = EncoderDecoderASR.from_hparams(source="speechbrain/asr-wav2vec2-commonvoice-en", savedir="pretrained_models/asr-wav2vec2-commonvoice-en")'
+RUN cd /app/speechbrain && python -c 'from speechbrain.pretrained import EncoderDecoderASR; asr_model = EncoderDecoderASR.from_hparams(source="speechbrain/asr-wav2vec2-transformer-aishell", savedir="pretrained_models/asr-wav2vec2-transformer-aishell")'
+
+
+EXPOSE 8080
+
+WORKDIR /app/speechbrain
+
+CMD ["/bin/bash"]

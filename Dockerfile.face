@@ -1,0 +1,31 @@
+FROM py3api:latest
+
+RUN apt update && apt install  -y --no-install-recommends python3-opencv ffmpeg
+
+RUN pip install face_recognition
+RUN pip install deepface
+
+# Download latest github/refacer in refacer directory
+# RUN git clone https://github.com/ageitgey/face_recognition.git /app/face_recognition
+RUN git clone https://github.com/jtn-ms/refacer.git /app/refacer
+RUN git clone https://github.com/serengil/deepface.git /app/deepface
+RUN git clone https://github.com/haofanwang/inswapper.git /app/inswapper
+RUN git lfs install && git clone https://huggingface.co/spaces/sczhou/CodeFormer /app/CodeFormer
+RUN git clone https://github.com/sczhou/CodeFormer.git /app/gCodeFormer
+
+# Download models - https://huggingface.co/Devia/G/blob/main/inswapper_128.onnx
+# RUN cd /app/refacer && wget --content-disposition https://huggingface.co/deepinsight/inswapper/resolve/main/inswapper_128.onnx
+# RUN cd /app/refacer && wget --content-disposition https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip && unzip buffalo_l.zip
+RUN cd /app/inswapper && mkdir checkpoints && wget -O ./checkpoints/inswapper_128.onnx https://huggingface.co/ashleykleynhans/inswapper/resolve/main/inswapper_128.onnx && cp /app/inswapper/checkpoints/inswapper_128.onnx /app/refacer
+#
+RUN cd /app/refacer && pip install -r requirements.txt
+RUN cd /app/inswapper && pip install -r requirements.txt
+RUN cd /app/gCodeFormer && pip install -r requirements.txt
+
+RUN pip cache purge
+RUN apt clean
+
+EXPOSE 8080
+
+WORKDIR /app/refacer
+CMD ["python", "app.py"]

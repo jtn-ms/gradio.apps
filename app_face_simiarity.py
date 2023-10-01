@@ -39,14 +39,16 @@ def calculate_similarity(image1, image2):
 with gr.Blocks() as iface:
     with gr.Row():
         gr.Markdown("# Face Similarity")
-    
+    with gr.Row():
+        inputs=[gr.Image(type="filepath",label="Image 1"), gr.Image(type="filepath",label="Image 2")]
     with gr.Column():
+        output=gr.Text(label="Similarity Score")
         button=gr.Button("Calc", variant="primary")
 
     button.click(fn=calculate_similarity,
                 #  inputs=[origin,targetImg,source_indexes,dest_indexes,num_of_sources,enable_face_restore,bkg_enhance,face_upsample,scaler,fidelity],
-                 inputs=[gr.Image(type="filepath",label="Image 1"), gr.Image(type="filepath",label="Image 2")],
-                 outputs=gr.Text(label="Similarity Score"))
+                 inputs=inputs,
+                 outputs=output)
 
 # Launch the Gradio web service
 if __name__ == "__main__":
