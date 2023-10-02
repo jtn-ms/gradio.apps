@@ -17,7 +17,7 @@ def speech_to_text(audio):
         return f"Could not request results; {str(e)}"
 
 # Define the Gradio interface
-iface = gr.Interface(
+demo = gr.Interface(
     fn=speech_to_text,
     inputs="audio",
     outputs="text",
@@ -27,4 +27,4 @@ iface = gr.Interface(
 
 # Launch the Gradio web service
 if __name__ == "__main__":
-    iface.launch(server_name="0.0.0.0",server_port=8080)
+    demo.launch(server_name="0.0.0.0",server_port=8080)

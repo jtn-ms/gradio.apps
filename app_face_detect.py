@@ -1,9 +1,6 @@
 import gradio as gr
 import face_recognition
 from PIL import Image
-import io
-import numpy as np
-import os
 
 # Function to detect and save faces from an image
 def detect_and_save_faces(*var):#input_image, margin_ratio):

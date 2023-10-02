@@ -2,10 +2,16 @@ import gradio as gr
 from transformers import pipeline
 import numpy as np
 
+# https://huggingface.co/models?pipeline_tag=automatic-speech-recognition&sort=likes&search=en
+# whisper model is the best
 models = {
-    "en": "openai/whisper-base.en",
-    "zh": "jonatasgrosman/wav2vec2-large-xlsr-53-chinese-zh-cn",
-    "ko": "kresnik/wav2vec2-large-xlsr-korean"
+    "en-whisper-base": "openai/whisper-base.en",
+    "en-whisper-small": "openai/whisper-small.en",
+    "zh-whisper-small": "xmzhu/whisper-small-zh",
+    "ko-whisper-small":"SungBeom/whisper-small-ko", 
+    "en-wav2vec2-large-xlsr-53":"jonatasgrosman/wav2vec2-large-xlsr-53-english",
+    "zh-wav2vec2-large-xlsr-53": "jonatasgrosman/wav2vec2-large-xlsr-53-chinese-zh-cn",
+    "ko-wav2vec2-large-xlsr": "kresnik/wav2vec2-large-xlsr-korean",
 }
 
 langs = list(models.keys())

@@ -1,5 +1,6 @@
 FROM py3api:latest
 
+# pip install llama2-wrapper==0.1.12
 RUN pip install accelerate==0.21.0 \
                 auto-gptq==0.3.0\
                 bitsandbytes==0.40.2\
