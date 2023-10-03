@@ -1,5 +1,5 @@
 image_name=face
-image_tag=ready
+image_tag=full
 container_name=${image_name}-app
 
 build:
@@ -8,6 +8,10 @@ build:
 access.bash:
 	@docker run -dit --name ${container_name} -p 80:8080 ${image_name}:${image_tag} bash
 	@docker container attach ${container_name}
+
+run.exited.container:
+	@docker start -p 80:8080 `docker ps -q -l` # restart it in the background
+	@docker attach `docker ps -q -l` # reattach the terminal & stdin
 
 create.access.point:
 	@docker exec -it ${container_name} /bin/bash

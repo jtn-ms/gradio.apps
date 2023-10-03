@@ -16,7 +16,7 @@ translator = pipeline(
 
 def translate(text):
     try:
-        return translator(text)["translation_text"]
+        return translator(text)[0]["translation_text"]
     except Exception as e:
         return str(e)
 

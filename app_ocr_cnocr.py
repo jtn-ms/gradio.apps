@@ -15,7 +15,7 @@ def run_ocr(input_image):#input_image, margin_ratio):
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
-with gr.Blocks() as iface:
+with gr.Blocks() as demo:
     with gr.Row():
         gr.Markdown("# CnOcr")
     
@@ -30,4 +30,4 @@ with gr.Blocks() as iface:
 
 # Launch the Gradio web service
 if __name__ == "__main__":
-    iface.launch(server_name="0.0.0.0",server_port=8080)
+    demo.launch(server_name="0.0.0.0",server_port=8080)

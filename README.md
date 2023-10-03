@@ -51,6 +51,12 @@
 - Image2Image
   - [ ] [stabilityai/stable-diffusion-xl-refiner-1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0)
 
+- Speech2Text
+  * [ ] https://github.com/openai/whisper
+
+- Text2Speech
+  * [ ] https://github.com/suno-ai/bark
+
 ## Models
 
 - overview: https://platform.openai.com/docs/models/overview

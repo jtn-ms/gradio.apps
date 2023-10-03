@@ -3,9 +3,11 @@ from gtts import gTTS
 import tempfile
 import os
 
+langs = ["en", "zh", "ko","jp","fr","ru"]
+
 # Function to perform text-to-speech conversion
-def text_to_speech(text):
-    tts = gTTS(text=text, lang='en')
+def text_to_speech(lang,text):
+    tts = gTTS(text=text, lang=lang)
     # Save the TTS output as an audio file
     with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmp_audio:
         tts.save(tmp_audio.name)
@@ -17,9 +19,9 @@ def speech_to_text(audio):
     return "Speech-to-text conversion not implemented."
 
 # Define the Gradio interface
-iface = gr.Interface(
+demo = gr.Interface(
     fn=text_to_speech,
-    inputs="text",
+    inputs=[gr.Dropdown(langs,label="Source", info="Choose Language"),"text"],
     outputs="audio",
     title="Text-to-Speech (TTS) Demo",
     description="Enter text, and the app will convert it to audio.",
@@ -27,4 +29,4 @@ iface = gr.Interface(
 
 # Launch the Gradio web service
 if __name__ == "__main__":
-    iface.launch(server_name="0.0.0.0",server_port=8080)
+    demo.launch(server_name="0.0.0.0",server_port=8080)

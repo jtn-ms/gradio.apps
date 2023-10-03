@@ -1,3 +1,10 @@
+## Issues
+
+### The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.
+
+- Close IIS Service in IIS Manager
+- Close Apache Service in Task Manager
+
 ### [layernormkernelimpl not implemented for 'half' stable diffusion](https://you.com/search?q=layernormkernelimpl+not+implemented+for+%27half%27+stable+diffusion&tbm=youchat&cfr=chatb&cid=c2_314078a2-2905-4e3c-8556-c42927e00cb4)
 
 The error message "RuntimeError: LayerNormKernelImpl not implemented for Half" in the context of Stable Diffusion indicates that the Layer Normalization operation is not implemented for the 'Half' data type. **This error typically occurs when trying to load the diffusion model in float16 (Half) format on a CPU , which is not supported**.
@@ -13,3 +20,7 @@ Check your PyTorch version: Ensure that you are using the latest version of PyTo
 Check the model compatibility: Verify that the diffusion model you are using is compatible with the version of PyTorch you have installed. There may be specific requirements or recommendations for the model version and PyTorch version compatibility.
 
 It's important to note that the specific solution may vary depending on your system setup and the specific code you are using. It's recommended to refer to the documentation or seek support from the Stable Diffusion community for further assistance.
+
+### Where to find downloaded models from huggingface.co
+
+- https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfhome

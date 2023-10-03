@@ -17,6 +17,10 @@ models = {
 langs = list(models.keys())
 current_lang = langs[0]
 pipe = None
+concatenated_result=""
+chunk_cnt = 0
+chunk_size = 20
+sr = 0 # sample rate
 
 def change_pipe(lang):
     global pipe
@@ -25,45 +29,50 @@ def change_pipe(lang):
 change_pipe(current_lang)
 
 def transcribe(lang, stream, new_chunk):
-    # change model
+    
     global current_lang
+    global concatenated_result
+    global chunk_cnt
+    global chunk_size
+    global sr
+
+    chunk_cnt += 1
+    # print(chunk_cnt)
+
+    # change model
     if lang and current_lang != lang:
         change_pipe(lang)
         current_lang=lang
+
+    if 1:
+        if not new_chunk and not stream: return stream, concatenated_result
+        if not new_chunk and stream:
+            concatenated_result += pipe({"sampling_rate": sr, "raw": stream})["text"]
+            stream = None
+            chunk_cnt = 0
+            return stream, concatenated_result
+    else:
+        if not new_chunk: return stream, "No streaming...\n"+concatenated_result
 
     sr, y = new_chunk
     y = y.astype(np.float32)
     y /= np.max(np.abs(y))
 
-    if stream is not None:
-        stream = np.concatenate([stream, y])
-    else:
-        stream = y
-    return stream, pipe({"sampling_rate": sr, "raw": stream})["text"]
+    stream = np.concatenate([stream, y]) if stream is not None else y
 
-# with gr.Blocks() as demo:
-#     with gr.Row():
-#         lang=gr.Dropdown(langs,label="Language", info="Choose Language")
-#         button=gr.Button("Recognition", variant="primary")
-#     lang.change(fn=change_pipe,inputs=lang)
-#     button.click(fn=transcribe,
-#                 inputs=["state", gr.Audio(source="microphone", streaming=True)],
-#                 outputs=["state", "text"],
-#     )
+    if chunk_cnt >= chunk_size:
+        concatenated_result += pipe({"sampling_rate": sr, "raw": stream})["text"]
+        stream = None
+        chunk_cnt = 0
 
-# # https://github.com/gradio-app/gradio/issues/2093
-# with gr.Blocks() as demo:
-#     lang=gr.Dropdown(langs,label="Language", info="Choose Language")
-#     mic = gr.Audio(source="microphone")
-#     text = gr.Textbox()
-#     mic.stream(transcribe, [lang,"state",mic], ["state",text])
+    return stream, concatenated_result
 
 demo = gr.Interface(
     transcribe,
     [gr.Dropdown(langs,label="Language", info="Choose Language"),"state", gr.Audio(source="microphone", streaming=True)],
     ["state", gr.Textbox(label="Output")],
-    allow_flagging='never',
-    show_progress=False,
+    # allow_flagging='never',
+    # show_progress=False,
     live=True,
 )
 
