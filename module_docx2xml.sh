@@ -1,0 +1,1 @@
+unzip file.docx -d folder-name
