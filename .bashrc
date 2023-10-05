@@ -11,3 +11,5 @@ alias image.play="chafa "
 # csvtool readable filename | view -
 alias csv.display=""
 alias chk.size="du -hs"
+
+alias chk.os="cat /etc/issue.net && cat /etc/debian_version"

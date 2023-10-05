@@ -1,0 +1,14 @@
+FROM nvm:latest
+
+RUN apt install -y sudo wireshark autopsy
+
+RUN mkdir /app/tools /app/awesome
+
+RUN git clone https://github.com/1N3/Sn1per.git /app/tools/sniper
+RUN git clone https://github.com/Z4nzu/hackingtool.git /app/tools/hackingtool
+# RUN git clone --recursive https://github.com/jekil/awesome-hacking.git /app/awesome/awesome-hacking
+
+EXPOSE 3000 5000 8080
+
+WORKDIR /app
+CMD ["bash"]

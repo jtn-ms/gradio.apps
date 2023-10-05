@@ -1,6 +1,6 @@
-image_name=face
-image_tag=full
-container_name=${image_name}-app
+image_name=nvm
+image_tag=latest
+container_name=hacking-tools#${image_name}-app
 
 build:
 	@docker build -t ${image_name} . -f Dockerfile.${image_name}
