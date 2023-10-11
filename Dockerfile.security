@@ -1,4 +1,8 @@
+# https://github.com/aaaguirrep/offensive-docker/blob/master/Dockerfile
 FROM nvm:latest
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 
 RUN apt install -y sudo wireshark autopsy
 

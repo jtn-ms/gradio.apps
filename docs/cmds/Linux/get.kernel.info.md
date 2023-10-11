@@ -1,0 +1,4 @@
+```sh
+dmesg
+iw list
+```

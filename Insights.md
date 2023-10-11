@@ -1,8 +1,18 @@
-
 ## FUTURE Models
+
+### + Astrology
 
 - face2destiny
 - DOB2destiny
+- palm2destiny
+
+### + Hacking
+
+- url2vulnerability: url2img + img2text(flaw report)
+- vulnerability2payload: (log)text2text(name of payload)
+- url2info: info(ip, geo-info, mac-address, tech-stack[ui, api, proxy])
+
+### Data Mining
 
 ## Mutli-Modal Model
 

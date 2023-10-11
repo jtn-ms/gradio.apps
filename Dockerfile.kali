@@ -1,0 +1,25 @@
+FROM kalilinux/kali-dev
+
+RUN echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list
+RUN echo "deb-src http://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list
+
+RUN apt update && apt install -y python2-dev python3-dev python-pip python3-pip
+# symlink python to python2
+RUN ln -s /usr/bin/python2 /usr/bin/python
+#RUN pip pip3 pipx
+
+# Install utilites
+RUN apt install -y iputils-ping nmap net-tools vim curl wget git sudo wireshark autopsy
+RUN pip install handi
+
+RUN mkdir -p /app/tools /app/awesome
+
+RUN git clone https://github.com/1N3/Sn1per.git /app/tools/sniper
+RUN git clone https://github.com/Z4nzu/hackingtool.git /app/tools/hackingtool
+# RUN git clone --recursive https://github.com/jekil/awesome-hacking.git /app/awesome/awesome-hacking
+RUN cd /app/tools/ && git clone https://github.com/SofianeHamlaoui/Lockdoor-Framework.git && cd Lockdoor-Framework && chmod +x ./install.sh && ./install.sh 
+
+EXPOSE 3000 5000 8080
+
+WORKDIR /app
+CMD ["bash"]
