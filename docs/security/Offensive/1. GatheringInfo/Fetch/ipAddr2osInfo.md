@@ -24,6 +24,123 @@ No exact OS matches for host (test conditions non-ideal).
 OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .        
 Nmap done: 1 IP address (1 host up) scanned in 20.30 seconds
 ```
+- use custom script: [`nmap -sV --script=vulscan/vulscan.nse  192.168.0.15`](https://github.com/scipag/vulscan)
+
+```sh
+┌──(root㉿docker-desktop)-[/app/collections/vulnerability.scan]
+└─# nmap -sV --script=vulscan/vulscan.nse   192.168.0.15
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2023-10-11 21:00 UTC
+Nmap scan report for 192.168.0.15
+Host is up (0.0068s latency).
+Not shown: 995 filtered tcp ports (no-response)
+PORT     STATE SERVICE       VERSION
+135/tcp  open  msrpc         Microsoft Windows RPC
+| vulscan: VulDB - https://vuldb.com:
+| No findings
+|
+| MITRE CVE - https://cve.mitre.org:
+| No findings
+|
+| SecurityFocus - https://www.securityfocus.com/bid/:
+| No findings
+|
+| IBM X-Force - https://exchange.xforce.ibmcloud.com:
+| No findings
+|
+| Exploit-DB - https://www.exploit-db.com:
+| No findings
+|
+| OpenVAS (Nessus) - http://www.openvas.org:
+| No findings
+|
+| SecurityTracker - https://www.securitytracker.com:
+| No findings
+|
+| OSVDB - http://www.osvdb.org:
+| No findings
+|_
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+| vulscan: VulDB - https://vuldb.com:
+| No findings
+|
+| MITRE CVE - https://cve.mitre.org:
+| No findings
+|
+| SecurityFocus - https://www.securityfocus.com/bid/:
+| No findings
+|
+| IBM X-Force - https://exchange.xforce.ibmcloud.com:
+| No findings
+|
+| Exploit-DB - https://www.exploit-db.com:
+| No findings
+|
+| OpenVAS (Nessus) - http://www.openvas.org:
+| No findings
+|
+| SecurityTracker - https://www.securitytracker.com:
+| No findings
+|
+| OSVDB - http://www.osvdb.org:
+| No findings
+|_
+445/tcp  open  microsoft-ds?
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+| vulscan: VulDB - https://vuldb.com:
+| No findings
+|
+| MITRE CVE - https://cve.mitre.org:
+| No findings
+|
+| SecurityFocus - https://www.securityfocus.com/bid/:
+| No findings
+|
+| IBM X-Force - https://exchange.xforce.ibmcloud.com:
+| No findings
+|
+| Exploit-DB - https://www.exploit-db.com:
+| No findings
+|
+| OpenVAS (Nessus) - http://www.openvas.org:
+| No findings
+|
+| SecurityTracker - https://www.securitytracker.com:
+| No findings
+|
+| OSVDB - http://www.osvdb.org:
+| No findings
+|_
+5357/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+| vulscan: VulDB - https://vuldb.com:
+| No findings
+|
+| MITRE CVE - https://cve.mitre.org:
+| No findings
+|
+| SecurityFocus - https://www.securityfocus.com/bid/:
+| No findings
+|
+| IBM X-Force - https://exchange.xforce.ibmcloud.com:
+| No findings
+|
+| Exploit-DB - https://www.exploit-db.com:
+| No findings
+|
+| OpenVAS (Nessus) - http://www.openvas.org:
+| No findings
+|
+| SecurityTracker - https://www.securitytracker.com:
+| No findings
+|
+| OSVDB - http://www.osvdb.org:
+| No findings
+|_
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 15.99 seconds
+```
 
 ## How to use nmap to detect my OS
 

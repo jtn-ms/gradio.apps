@@ -127,3 +127,48 @@ A proxy is a server that acts on behalf of another server or client. There are t
 •  A forward proxy can be used for various purposes, such as bypassing censorship, filtering content, caching data, or accessing geo-restricted services. A reverse proxy can be used for various purposes, such as load balancing, security, compression, encryption, or caching data.
 
 •  A forward proxy is usually configured by the client, either manually or through a browser extension. A reverse proxy is usually configured by the server administrator, either on the same machine as the server or on a separate machine.
+
+## [Wifi Positioning System](https://www.howtogeek.com/708500/how-devices-use-wi-fi-to-determine-your-physical-location/)
+
+### How Wi-Fi Gives Away Your Location
+
+Here's how the "Wi-Fi positioning system" works: Your device scans nearby Wi-Fi access points and creates a list of them as well as their relative signal strength in your current location. It then contacts online servers that, essentially, contain a list of Wi-Fi access points around the world and their geographical locations.
+
+The database doesn't just include a list of Wi-FI access point names (SSIDs). The database includes the unique MAC addresses (BSSIDs) of those access points, which normally do not change---even if the Wi-Fi network's visible name changes.
+
+By comparing this list of Wi-Fi networks near you to a known list of access points and their locations, Location Services can guess at your general location. And, by comparing the relative signal strengths of the various Wi-Fi networks, Location Services can triangulate your location and, often, precisely determine your location, just as if you were using GPS.
+
+Devices might also download and cache some of this data. For example, if they know that you're in a particular town, they might download and store Wi-Fi information in and around that town so that they can more easily find your location, even if you don't have a network connection to check the database.
+
+### Where Does the Wi-Fi Database Come From?
+
+Over a decade ago, Google was gathering data about Wi-Fi networks using its Street View cars. While those cars were driving around and capturing photos of storefronts, houses, and roads, they were also scanning for nearby Wi-Fi networks and saving the Wi-Fi data for use with Location Services.
+
+But this applies to more than just Google---Apple, Microsoft, and other companies have their own Location Services systems.
+
+Also, it's not about Street View cars anymore. Google's Street View cars no longer drive around scanning everyone's Wi-Fi to keep its databases up to date.
+
+Instead, the Location Services software built into your devices continually sends data that keeps these databases up to date. For example, let's say that you open Google Maps on an Android phone. You have a strong GPS signal---great, your phone knows where you are via GPS. Now, your phone scans your nearby wireless networks and uploads a list of them to Google's Location Services database along with your current location.
+
+Everyone using Location Services is continually updating the database with more current data. Of course, companies promise that this data is anonymous and not connected to any individual.
+
+For example, Apple's Location Services & Privacy policy describes it in this way on an iPhone:
+
+" If Location Services is on, your iPhone will periodically send the geo-tagged locations of nearby Wi-Fi hotspots and cell towers (where supported by a device) in an anonymous and encrypted form to Apple, to be used for augmenting this crowd-sourced data of Wi-Fi hotspot and cell tower locations."
+
+### What About Privacy?
+
+A Wi-Fi access point's name and address is public by definition. Your wireless router is constantly broadcasting this information to any device that cares to listen nearby.
+
+Again, the databases just get a list of nearby networks, their unique identifiers, and their physical locations. They don't get any information about who is using these networks or what data is being transferred over Wi-Fi. They don't get any passphrases people need to connect to these networks.
+
+Modern operating systems prevent apps and websites from accessing this data unless you give them permission. A website or an app can't just view the list of nearby Wi-Fi networks and do this calculation on its own. It has to ask your browser or operating system for access to your location, and you can turn down the request. You remain in control.
+
+(Of course, desktop software that has full access to your operating system---traditional Windows desktop applications, for example---could access the Wi-Fi data directly. Websites, mobile apps, and apps written using Windows 10's UWP framework are restricted from accessing this information.)
+
+### What If You Don't Want Your Wi-Fi in the Databases?
+To prevent your own devices from uploading information about their nearby Wi-Fi networks, you'd have to disable Location Services. However, other people near you are almost certainly be using Location Services on their phones, and their devices would upload this data.
+
+You can prevent your own wireless access point from being captured in some Location Services databases if you like. To opt out of Google's Location Services database, Google asks you to add "_nomap" to the end of your wireless network's name, or SSID. For example, if your network is currently "My Network," you could change it to "**My Network_nomap**".
+
+However, Google notes that this will only affect Google's own Location Services database---other providers may not work in the same way. You'll have to do some research into this if you care to remove it from other Location Services databases, too.

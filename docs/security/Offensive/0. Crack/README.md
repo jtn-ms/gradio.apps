@@ -1,3 +1,5 @@
-- FILE: Hashcat, John the Ripper
+- File: Hashcat, John the Ripper
 - Service(ssh/ftp/http/https): Hydra
 - Wifi: aircrack-ng
+- ssh: ssb, mec
+- msrpc: rpcclient

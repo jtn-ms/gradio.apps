@@ -8,9 +8,13 @@
 
 ### + Hacking
 
-- url2vulnerability: url2img + img2text(flaw report)
+- ipAddr2com_info: info(ip, geo-info, mac-address, tech-stack[ui, api, proxy])
+- ipAddr2vulnerability: url2img + img2text(flaw report)
 - vulnerability2payload: (log)text2text(name of payload)
-- url2info: info(ip, geo-info, mac-address, tech-stack[ui, api, proxy])
+- userInfo2userNames
+- userInfo2passwords
+- encrypted2decrypted
+- encoded2decoded
 
 ### Data Mining
 

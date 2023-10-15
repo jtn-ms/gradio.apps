@@ -1,4 +1,9 @@
 - BruteForce
+- Positioning: 
+  * [bssid2position](https://www.mylnikov.org/)
+  * mac2position
+- ipAddr2vulnerability: 
+- Session Hijacking
 
 ## Procedures
 
